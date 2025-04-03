@@ -1,0 +1,166 @@
+mydatabase> db.orders.find({status:"pending"})
+[
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1417'),
+    o_id: '36',
+    u_id: '4036',
+    p_id: '3',
+    qty: 50,
+    status: 'pending'
+  }
+]
+mydatabase> db.products.find({price:{$gt:"30"})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:34)
+
+> 1 | db.products.find({price:{$gt:"30"})
+    |                                   ^
+  2 |
+
+mydatabase> db.products.find({price:{$gt:"30"})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:34)
+
+> 1 | db.products.find({price:{$gt:"30"})
+    |                                   ^
+  2 |
+
+mydatabase> db.products.find({price:{$gt:"30"}})
+[
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1414'),
+    p_id: '5',
+    name: 'spoon',
+    price: '50',
+    stock: 60,
+    category: 'kitchen'
+  }
+]
+mydatabase> db.products.find({price:{$gt:30}})
+
+mydatabase> db.products.updateOne({p_id:"1"},{$set:{price:30}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+mydatabase> db.products.updateOne({p_id:"2"},{$set:{price:40}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+mydatabase> db.products.updateOne({p_id:"3"},{$set:{price:90}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+mydatabase> db.products.updateOne({p_id:"4"},{$set:{price:200}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+mydatabase> db.products.updateOne({p_id:"5"},{$set:{price:400}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+mydatabase> db.products.find()
+[
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1410'),
+    p_id: '1',
+    name: 'pen',
+    price: 30,
+    stock: 4,
+    category: 'stationary'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1411'),
+    p_id: '2',
+    name: 'pencil',
+    price: 40,
+    stock: 20,
+    category: 'stationary'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1412'),
+    p_id: '3',
+    name: 'charger',
+    price: 90,
+    stock: 0,
+    category: 'electrical'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1413'),
+    p_id: '4',
+    name: 'brush',
+    price: 200,
+    stock: 40,
+    category: 'hygieneproducts'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1414'),
+    p_id: '5',
+    name: 'spoon',
+    price: 400,
+    stock: 60,
+    category: 'kitchen'
+  }
+]
+mydatabase> db.products.find({price:{$gt:"30"})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:34)
+
+> 1 | db.products.find({price:{$gt:"30"})
+    |                                   ^
+  2 |
+
+mydatabase> db.products.find({price:{$gt:90})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:32)
+
+> 1 | db.products.find({price:{$gt:90})
+    |                                 ^
+  2 |
+
+mydatabase> db.products.find({price:{$gt:90})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:32)
+
+> 1 | db.products.find({price:{$gt:90})
+    |                                 ^
+  2 |
+
+mydatabase> db.products.find({price:{$gt:90}})
+[
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1413'),
+    p_id: '4',
+    name: 'brush',
+    price: 200,
+    stock: 40,
+    category: 'hygieneproducts'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1414'),
+    p_id: '5',
+    name: 'spoon',
+    price: 400,
+    stock: 60,
+    category: 'kitchen'
+  }
+]
