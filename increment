@@ -1,0 +1,59 @@
+mydatabase> db.orders.updateOne({id:004},{$set:{status:"shipping"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+mydatabase> db.orders.updateOne({p_id:"4"},{$set:{status:"shipping"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+mydatabase> db.orders.find()
+[
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1415'),
+    o_id: '19',
+    u_id: '4019',
+    p_id: '1',
+    qty: 10,
+    status: 'delivered'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1416'),
+    o_id: '69',
+    u_id: '4069',
+    p_id: '2',
+    qty: 20,
+    status: 'delivered'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1417'),
+    o_id: '36',
+    u_id: '4036',
+    p_id: '3',
+    qty: 50,
+    status: 'pending'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1418'),
+    o_id: '40',
+    u_id: '4040',
+    p_id: '4',
+    qty: 70,
+    status: 'shipping'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1419'),
+    o_id: '67',
+    u_id: '4067',
+    p_id: '5',
+    qty: 90,
+    status: 'delivered'
+  }
+]
