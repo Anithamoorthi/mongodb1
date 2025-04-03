@@ -1,0 +1,253 @@
+
+test> use mydatabase
+switched to db mydatabase
+mydatabase> db.createCollection("Users")
+{ ok: 1 }
+mydatabase> db.Users.insertMany([{u_id:"4019",name:"anitha",city:"tvm"},{u_id:"4069",name:"gobika",city:"cdm"},{u_id:"4036",name:"axshlin",city:"chennai"},{u_id:"4040",name:"bhuvana",city:"kalakurchi"},{u_id:"4067",name:"swetha",city:"namakal"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67ee0750777d3d01c66b140b'),
+    '1': ObjectId('67ee0750777d3d01c66b140c'),
+    '2': ObjectId('67ee0750777d3d01c66b140d'),
+    '3': ObjectId('67ee0750777d3d01c66b140e'),
+    '4': ObjectId('67ee0750777d3d01c66b140f')
+mydatabase> db.products.insertMany([{p_id:"1",name:"pen",price:"10",stock:"available",category:"stationary"},{p_id:"2",name:"pencil",price:"10",stock:"available",category:"stationary"},{p_id:"3",name:"charger",price:"100",stock:"available",category:"electrical"},{p_id:"4",name:"brush",price:"30",stock:"available",category:"hygieneproducts"},{p_id:"5",name:"spoon",price:"50",stock:"notavailable",category:"kitchen"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67ee0ecb777d3d01c66b1410'),
+    '1': ObjectId('67ee0ecb777d3d01c66b1411'),
+    '2': ObjectId('67ee0ecb777d3d01c66b1412'),
+    '3': ObjectId('67ee0ecb777d3d01c66b1413'),
+    '4': ObjectId('67ee0ecb777d3d01c66b1414')
+  }
+mydatabase> db.orders.insertMany([{o_id:"19",u_id:"4019",p_id:"1",qty:10,status:"delivered"},{
+mydatabase>
+
+mydatabase>  db.orders.insertMany([{o_id:"19",u_id:"4019",p_id:"1",qty:10,status:"delivered"},{o_id:"69",u_id:"4069",p_id:"2",qty:20,status:"delivered"},{o_id:"36",u_id:"4036",p_id:"3",qty:50,status:"pending"},{o_id:"40",u_id:"4040",p_id:"4",qty:70,status:"pending"},{o_id:"67",u_id:"4067",p_id:"5",qty:90,status:"delivered"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67ee0ff6777d3d01c66b1415'),
+    '1': ObjectId('67ee0ff6777d3d01c66b1416'),
+    '2': ObjectId('67ee0ff6777d3d01c66b1417'),
+    '3': ObjectId('67ee0ff6777d3d01c66b1418'),
+    '4': ObjectId('67ee0ff6777d3d01c66b1419')
+  }
+mydatabase> db.products.find()
+[
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1410'),
+    p_id: '1',
+    name: 'pen',
+    price: '10',
+    stock: 'available',
+    category: 'stationary'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1411'),
+    p_id: '2',
+    name: 'pencil',
+    price: '10',
+    stock: 'available',
+    category: 'stationary'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1412'),
+    p_id: '3',
+    name: 'charger',
+    price: '100',
+    stock: 'available',
+    category: 'electrical'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1413'),
+    p_id: '4',
+    name: 'brush',
+    price: '30',
+    stock: 'available',
+    category: 'hygieneproducts'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1414'),
+    p_id: '5',
+    name: 'spoon',
+    price: '50',
+    stock: 'notavailable',
+    category: 'kitchen'
+  }
+mydatabase> db.payments.insertMany([{id:001,o_id:"19",price:"10",status:"successful",method:"UPI"},{id:002,o_id:"69",price:"10",status:"successful",method:"UPI"},{id:003,o_id:"36",price:"100",status:"successful",method:"CASH"},{id:004,o_id:"40",price:"30",status:"successful",method:"UPI"},{id:005,o_id:"67",price:"50",status:"successful",method:"CREDITCARD"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67ee1214777d3d01c66b141a'),
+    '1': ObjectId('67ee1214777d3d01c66b141b'),
+    '2': ObjectId('67ee1214777d3d01c66b141c'),
+    '3': ObjectId('67ee1214777d3d01c66b141d'),
+    '4': ObjectId('67ee1214777d3d01c66b141e')
+  }
+}
+mydatabase> db.Users.find()
+[
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140b'),
+    u_id: '4019',
+    name: 'anitha',
+    city: 'tvm'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140c'),
+    u_id: '4069',
+    name: 'gobika',
+    city: 'cdm'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140d'),
+    u_id: '4036',
+    name: 'axshlin',
+    city: 'chennai'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140e'),
+    u_id: '4040',
+    name: 'bhuvana',
+    city: 'kalakurchi'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140f'),
+    u_id: '4067',
+    name: 'swetha',
+    city: 'namakal'
+  }
+]
+mydatabase> db.products.find()
+[
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1410'),
+    p_id: '1',
+    name: 'pen',
+    price: '10',
+    stock: 'available',
+    category: 'stationary'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1411'),
+    p_id: '2',
+    name: 'pencil',
+    price: '10',
+    stock: 'available',
+    category: 'stationary'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1412'),
+    p_id: '3',
+    name: 'charger',
+    price: '100',
+    stock: 'available',
+    category: 'electrical'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1413'),
+    p_id: '4',
+    name: 'brush',
+    price: '30',
+    stock: 'available',
+    category: 'hygieneproducts'
+  },
+  {
+    _id: ObjectId('67ee0ecb777d3d01c66b1414'),
+    p_id: '5',
+    name: 'spoon',
+    price: '50',
+    stock: 'notavailable',
+    category: 'kitchen'
+  }
+]
+mydatabase> db.orders.find()
+[
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1415'),
+    o_id: '19',
+    u_id: '4019',
+    p_id: '1',
+    qty: 10,
+    status: 'delivered'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1416'),
+    o_id: '69',
+    u_id: '4069',
+    p_id: '2',
+    qty: 20,
+    status: 'delivered'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1417'),
+    o_id: '36',
+    u_id: '4036',
+    p_id: '3',
+    qty: 50,
+    status: 'pending'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1418'),
+    o_id: '40',
+    u_id: '4040',
+    p_id: '4',
+    qty: 70,
+    status: 'pending'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1419'),
+    o_id: '67',
+    u_id: '4067',
+    p_id: '5',
+    qty: 90,
+    status: 'delivered'
+  }
+]
+mydatabase> db.payments.find()
+[
+  {
+    _id: ObjectId('67ee1214777d3d01c66b141a'),
+    id: 1,
+    o_id: '19',
+    price: '10',
+    status: 'successful',
+    method: 'UPI'
+  },
+  {
+    _id: ObjectId('67ee1214777d3d01c66b141b'),
+    id: 2,
+    o_id: '69',
+    price: '10',
+    status: 'successful',
+    method: 'UPI'
+  },
+  {
+    _id: ObjectId('67ee1214777d3d01c66b141c'),
+    id: 3,
+    o_id: '36',
+    price: '100',
+    status: 'successful',
+    method: 'CASH'
+  },
+  {
+    _id: ObjectId('67ee1214777d3d01c66b141d'),
+    id: 4,
+    o_id: '40',
+    price: '30',
+    status: 'successful',
+    method: 'UPI'
+  },
+  {
+    _id: ObjectId('67ee1214777d3d01c66b141e'),
+    id: 5,
+    o_id: '67',
+    price: '50',
+    status: 'successful',
+    method: 'CREDITCARD'
+  }
+]
+mydatabase>
