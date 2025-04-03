@@ -1,0 +1,114 @@
+mydatabase> db.users.find({},{name:1,city:1,u_id:0})
+MongoServerError[Location31254]: Cannot do exclusion on field u_id in inclusion projection
+mydatabase> db.Users.find({},{name:1,city:1,u_id:0})
+MongoServerError[Location31254]: Cannot do exclusion on field u_id in inclusion projection
+mydatabase> db.Users.find({},{name:1,city:1})
+[
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140b'),
+    name: 'anitha',
+    city: 'tvm'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140d'),
+    name: 'axshlin',
+    city: 'chennai'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140e'),
+    name: 'bhuvana',
+    city: 'kalakurchi'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140f'),
+    name: 'swetha',
+    city: 'namakal'
+  }
+]
+mydatabase> db.Users.updateMany({},{$inc:{age:20}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+mydatabase> db.Users.find()
+[
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140b'),
+    u_id: '4019',
+    name: 'anitha',
+    city: 'tvm',
+    age: 20
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140d'),
+    u_id: '4036',
+    name: 'axshlin',
+    city: 'chennai',
+    age: 20
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140e'),
+    u_id: '4040',
+    name: 'bhuvana',
+    city: 'kalakurchi',
+    age: 20
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140f'),
+    u_id: '4067',
+    name: 'swetha',
+    city: 'namakal',
+    age: 20
+  }
+]
+mydatabase> db.Users.replaceOne({name:"axshlin"},{name:"axshlin",age:30,city:"palavaram"})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+mydatabase> db.Users.find()
+[
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140b'),
+    u_id: '4019',
+    name: 'anitha',
+    city: 'tvm',
+    age: 20
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140d'),
+    name: 'axshlin',
+    age: 30,
+    city: 'palavaram'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140e'),
+    u_id: '4040',
+    name: 'bhuvana',
+    city: 'kalakurchi',
+    age: 20
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140f'),
+    u_id: '4067',
+    name: 'swetha',
+    city: 'namakal',
+    age: 20
+  }
+]
+mydatabase>
+
+
+
+
+
+
+
+
+
