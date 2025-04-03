@@ -1,0 +1,114 @@
+Join collections($lookup)
+db.orders.aggregate([{$lookup:{from:"Users",localField:"u_id",foreignField:"u_id",as:"Users"}},{$unwind:"$Users"},{$project:{o_id:1,"Users.name":1,p_id:1,qty:1,status:1}}])
+[
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1415'),
+    o_id: '19',
+    p_id: '1',
+    qty: 10,
+    status: 'delivered',
+    Users: { name: 'anitha' }
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1416'),
+    o_id: '69',
+    p_id: '2',
+    qty: 20,
+    status: 'delivered',
+    Users: { name: 'gobika' }
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1417'),
+    o_id: '36',
+    p_id: '3',
+    qty: 50,
+    status: 'pending',
+    Users: { name: 'axshlin' }
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1418'),
+    o_id: '40',
+    p_id: '4',
+    qty: 70,
+    status: 'shipping',
+    Users: { name: 'bhuvana' }
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1419'),
+    o_id: '67',
+    p_id: '5',
+    qty: 90,
+    status: 'delivered',
+    Users: { name: 'swetha' }
+  }
+]
+
+Group By ($group)
+db.orders.aggregate([{$group:{_id:"$u_id",totalOrders:{$sum:1}}}])
+[
+  { _id: '4040', totalOrders: 1 },
+  { _id: '4019', totalOrders: 1 },
+  { _id: '4067', totalOrders: 1 },
+  { _id: '4036', totalOrders: 1 },
+  
+ Sorting ($sort) 
+  db.orders.aggregate([{$sort:{qty:-1}}])
+[
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1419'),
+    o_id: '67',
+    u_id: '4067',
+    p_id: '5',
+    qty: 90,
+    status: 'delivered'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1418'),
+    o_id: '40',
+    u_id: '4040',
+    p_id: '4',
+    qty: 70,
+    status: 'shipping'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1417'),
+    o_id: '36',
+    u_id: '4036',
+    p_id: '3',
+    qty: 50,
+    status: 'pending'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1416'),
+    o_id: '69',
+    u_id: '4069',
+    p_id: '2',
+    qty: 20,
+    status: 'delivered'
+  },
+  {
+    _id: ObjectId('67ee0ff6777d3d01c66b1415'),
+    o_id: '19',
+    u_id: '4019',
+    p_id: '1',
+    qty: 10,
+    status: 'delivered'
+  }
+]
+
+Combining Aggregation Operators
+ # Total Revenue from Each Product
+
+db.orders.aggregate([{$lookup:{from:"products",localField:"p_id",foreignField:"p_id",as:"product_details"}},{$unwind:"$product_details"},{$group:{_id:"$p_id",totalRevenue:{$sum:{$multiply:["$quantity","$product_details.price"]}}}},{$sort:{totalRevenue:-1}}])
+[
+  { _id: '3', totalRevenue: 0 },
+  { _id: '4', totalRevenue: 0 },
+  { _id: '5', totalRevenue: 0 },
+  { _id: '2', totalRevenue: 0 },
+  { _id: '1', totalRevenue: 0 }
+]
+
+Filter & Aggregation ($match + $group)
+ # Total Sales for Only Delivered Orders
+mydatabase> db.orders.aggregate([{$match:{status:"delivered"}},{$group:{_id:null,totalSales:{$sum:"$qty"}}}])
+[ { _id: null, totalSales: 120 } ]
