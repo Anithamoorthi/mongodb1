@@ -1,0 +1,29 @@
+mydatabase> db.Users.deleteOne({u_id:"4069"})
+{ acknowledged: true, deletedCount: 1 }
+mydatabase> db.Users.find()
+[
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140b'),
+    u_id: '4019',
+    name: 'anitha',
+    city: 'tvm'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140d'),
+    u_id: '4036',
+    name: 'axshlin',
+    city: 'chennai'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140e'),
+    u_id: '4040',
+    name: 'bhuvana',
+    city: 'kalakurchi'
+  },
+  {
+    _id: ObjectId('67ee0750777d3d01c66b140f'),
+    u_id: '4067',
+    name: 'swetha',
+    city: 'namakal'
+  }
+]
