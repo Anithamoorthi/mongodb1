@@ -1,0 +1,387 @@
+USING OR
+db.student_info.find({$or:[{course:"Mathematics"},{course:"Physics"}]})
+[
+  {
+    _id: ObjectId('67f09b3986bec23a6bb71236'),
+    id: 1,
+    name: 'John',
+    age: 22,
+    course: 'Mathematics',
+    marks: 85
+  },
+  {
+    _id: ObjectId('67f09b3986bec23a6bb71237'),
+    id: 2,
+    name: 'Alice',
+    age: 23,
+    course: 'Physics',
+    marks: 90
+  },
+  {
+    _id: ObjectId('67f09b3986bec23a6bb7123a'),
+    id: 5,
+    name: 'David',
+    age: 25,
+    course: 'Mathematics',
+    marks: 90
+  }
+]
+
+ USING IN
+ db.student_info.find({course:{$in:["Mathematics","Physics"]}})
+[
+  {
+    _id: ObjectId('67f09b3986bec23a6bb71236'),
+    id: 1,
+    name: 'John',
+    age: 22,
+    course: 'Mathematics',
+    marks: 85
+  },
+  {
+    _id: ObjectId('67f09b3986bec23a6bb71237'),
+    id: 2,
+    name: 'Alice',
+    age: 23,
+    course: 'Physics',
+    marks: 90
+  },
+  {
+    _id: ObjectId('67f09b3986bec23a6bb7123a'),
+    id: 5,
+    name: 'David',
+    age: 25,
+    course: 'Mathematics',
+    marks: 90
+  }
+]
+
+USING SORT
+db.student_info.find({course:"Mathematics"}).sort({marks:-1}).limit(1)
+[
+  {
+    _id: ObjectId('67f09b3986bec23a6bb7123a'),
+    id: 5,
+    name: 'David',
+    age: 25,
+    course: 'Mathematics',
+    marks: 90
+  }
+]
+
+FIND BETWEEN MARKS
+db.student_info.find({$and:[{course:{$in:["Mathematics","Physics"]}},{marks:{$gte:75,$lte:90}}]})
+[
+  {
+    _id: ObjectId('67f09b3986bec23a6bb71236'),
+    id: 1,
+    name: 'John',
+    age: 22,
+    course: 'Mathematics',
+    marks: 85
+  },
+  {
+    _id: ObjectId('67f09b3986bec23a6bb71237'),
+    id: 2,
+    name: 'Alice',
+    age: 23,
+    course: 'Physics',
+    marks: 90
+  },
+  {
+    _id: ObjectId('67f09b3986bec23a6bb7123a'),
+    id: 5,
+    name: 'David',
+    age: 25,
+    course: 'Physics',
+    marks: 90
+  }
+]
+
+FIND AND UPDATE THE PRICE
+ db.products.updateMany({category:"Electronics",stock:{$gt:100}},{$mul:{price:1.10}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+mydatabase> db.products.find()
+[
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123b'),
+    id: 1,
+    name: 'Laptop',
+    category: 'Electronics',
+    price: 1000,
+    stock: 50
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123c'),
+    id: 2,
+    name: 'Smartphone',
+    category: 'Electronics',
+    price: 700,
+    stock: 100
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123d'),
+    id: 3,
+    name: 'T-shirt',
+    category: 'Clothing',
+    price: 20,
+    stock: 200
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123e'),
+    id: 4,
+    name: 'Washing machine',
+    category: 'Home applicance',
+    price: 500,
+    stock: 30
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123f'),
+    id: 5,
+    name: 'Headphones',
+    category: 'Electronics',
+    price: 165,
+    stock: 150
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71240'),
+    id: 6,
+    name: 'Blender',
+    category: 'Electronics',
+    price: 165,
+    stock: 150
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71241'),
+    id: 7,
+    name: 'Jeans',
+    category: 'Clothing',
+    price: 40,
+    stock: 150
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71242'),
+    id: 8,
+    name: 'Microwave oven',
+    category: 'Home applicance',
+    price: 120,
+    stock: 60
+  }
+]
+
+ COUNT VALUE
+ db.products.find({category:"Home applicance",stock:{$gt:0}}).count()
+2
+
+db.products.find({category:"Clothing"}).sort({price:-1}).limit(1)
+[
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71241'),
+    id: 7,
+    name: 'Jeans',
+    category: 'Clothing',
+    price: 40,
+    stock: 150
+  }
+]
+
+FIND AND UPDATE
+db.products.findOneAndUpdate(
+...   { category: "Clothing" },
+...   { $set: { stock: 100 } },
+...   { sort: { price: -1 }, returnDocument: "after" } // 👈 returns updated doc
+... );
+...
+{
+  _id: ObjectId('67f0b91586bec23a6bb71241'),
+  id: 7,
+  name: 'Jeans',
+  category: 'Clothing',
+  price: 40,
+  stock: 100
+}
+
+ db.products.updateMany({price:{$gte:50,$lte:500}},{$mul:{price:0.95}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+mydatabase> db.products.find()
+[
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123b'),
+    id: 1,
+    name: 'Laptop',
+    category: 'Electronics',
+    price: 1000,
+    stock: 50
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123c'),
+    id: 2,
+    name: 'Smartphone',
+    category: 'Electronics',
+    price: 700,
+    stock: 100
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123d'),
+    id: 3,
+    name: 'T-shirt',
+    category: 'Clothing',
+    price: 20,
+    stock: 200
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123e'),
+    id: 4,
+    name: 'Washing machine',
+    category: 'Home applicance',
+    price: 475,
+    stock: 30
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123f'),
+    id: 5,
+    name: 'Headphones',
+    category: 'Electronics',
+    price: 156.75,
+    stock: 150
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71240'),
+    id: 6,
+    name: 'Blender',
+    category: 'Electronics',
+    price: 156.75,
+    stock: 150
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71241'),
+    id: 7,
+    name: 'Jeans',
+    category: 'Clothing',
+    price: 40,
+    stock: 100
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71242'),
+    id: 8,
+    name: 'Microwave oven',
+    category: 'Home applicance',
+    price: 114,
+    stock: 60
+  }
+]
+
+USING DELETE
+mydatabase> db.products.deleteMany({stock:{$lte:50}})
+{ acknowledged: true, deletedCount: 2 }
+mydatabase> db.products.find()
+[
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123c'),
+    id: 2,
+    name: 'Smartphone',
+    category: 'Electronics',
+    price: 700,
+    stock: 100
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123d'),
+    id: 3,
+    name: 'T-shirt',
+    category: 'Clothing',
+    price: 20,
+    stock: 200
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123f'),
+    id: 5,
+    name: 'Headphones',
+    category: 'Electronics',
+    price: 156.75,
+    stock: 150
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71240'),
+    id: 6,
+    name: 'Blender',
+    category: 'Electronics',
+    price: 156.75,
+    stock: 150
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71241'),
+    id: 7,
+    name: 'Jeans',
+    category: 'Clothing',
+    price: 40,
+    stock: 100
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71242'),
+    id: 8,
+    name: 'Microwave oven',
+    category: 'Home applicance',
+    price: 114,
+    stock: 60
+  }
+]
+
+SORT
+ db.products.find({category:"Electronics"}).sort({price:-1}).limit(3)
+[
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123c'),
+    id: 2,
+    name: 'Smartphone',
+    category: 'Electronics',
+    price: 700,
+    stock: 100
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb7123f'),
+    id: 5,
+    name: 'Headphones',
+    category: 'Electronics',
+    price: 156.75,
+    stock: 150
+  },
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71240'),
+    id: 6,
+    name: 'Blender',
+    category: 'Electronics',
+    price: 156.75,
+    stock: 150
+  }
+]
+db.products.find({$or:[{category:"Microwave oven"},{category:"Home applicance",stock:{$gte:50}}]})
+[
+  {
+    _id: ObjectId('67f0b91586bec23a6bb71242'),
+    id: 8,
+    name: 'Microwave oven',
+    category: 'Home applicance',
+    price: 114,
+    stock: 60
+  }
+]
+db.products.updateMany({category:"Clothing",stock:{$lt:100},price:{$gt:30}},{$mul:{price:1.15}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
